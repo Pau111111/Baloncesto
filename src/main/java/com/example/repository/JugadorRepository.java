@@ -1,10 +1,12 @@
 package com.example.repository;
 
 import com.example.domain.Jugador;
+import com.example.domain.Posicion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -12,9 +14,20 @@ import java.util.List;
  */
 public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
-    String findByNombre(String nombre);
-
     //Spring Data Queries
+
+    List<Jugador> findByNombre(String nombre);
+    List<Jugador> findBycanastasGreaterThanEqual(Integer canastas);
+    List<Jugador> findByasisteciasBetween(Integer min, Integer max);
+    List<Jugador> findByposicion(Posicion posicion);
+    List<Jugador> findByfecha_nacimientoBefore(LocalDate nacimiento);
+
+    @Query("SELECT jugadores.posicion, AVG(jugadores.canastas)," +
+            "AVG(jugadores.asistencias), AVG(jugadores.rebotes)," +
+            "FROM Jugadores jugadores"+
+            "GROUP BY jugadores.posicion")
+           List<Object[]>AvgJugadoresposicion();
+
 
 
 }

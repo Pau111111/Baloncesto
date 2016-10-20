@@ -11,6 +11,7 @@ import java.time.LocalDate;
 /**
  * Created by 53868459K on 14/10/2016.
  */
+
 @Entity
 public class Jugador {
 
@@ -24,8 +25,6 @@ public class Jugador {
     private Integer rebotes;
     private Posicion posicion;
 
-    public Jugador(String pablo, LocalDate of, int canastas, int asistencias, int rebotes, String alero) {
-    }
 
     public Jugador(String nombre, LocalDate fecha_nacimiento, Integer canastas, Integer asistencias, Integer rebotes, Posicion posicion) {
         this.nombre = nombre;
@@ -34,6 +33,9 @@ public class Jugador {
         this.asistencias = asistencias;
         this.rebotes = rebotes;
         this.posicion = posicion;
+    }
+
+    public Jugador() {
     }
 
     public long getId() {

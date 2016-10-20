@@ -1,11 +1,14 @@
 package com.example.service;
 
 import com.example.domain.Jugador;
+import com.example.domain.Posicion;
 import com.example.repository.JugadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+
+import static com.example.domain.Posicion.*;
 
 /**
  * Created by 53868459K on 14/10/2016.
@@ -18,23 +21,44 @@ public class JugadorService {
 
     public void testJugadores(){
 
-        Jugador jugador1 = new Jugador("Pablo", LocalDate.of(1996, 1, 14), 220, 300, 250, "alero");
+        Jugador jugador1 = new Jugador();
+        jugador1.setNombre("Pablo");
+        jugador1.setFecha_nacimiento(LocalDate.of(1996, 1, 1));
+        jugador1.setCanastas(200);
+        jugador1.setAsistencias(359);
+        jugador1.setRebotes(168);
+        jugador1.setPosicion(pivot);
+
         jugadorRepository.save(jugador1);
 
-        Jugador jugador2 = new Jugador("Sergio", LocalDate.of(1996, 10, 18), 200, 350, 168, "pivot");
+        Jugador jugador2 = new Jugador("Sergio", LocalDate.of(1996, 10, 18), 200, 350, 168, pivot);
         jugadorRepository.save(jugador2);
 
-        Jugador jugador3 = new Jugador("Cortesina", LocalDate.of(1756   , 1, 1),400, 657, 1, "base");
+        Jugador jugador3 = new Jugador("Cortesina", LocalDate.of(1756, 1, 1),400, 657, 1, base);
         jugadorRepository.save(jugador3);
 
-        Jugador jugador4 = new Jugador("Juanjo", LocalDate.of(2001, 3, 13), 2, 5, 6, "alero");
+        Jugador jugador4 = new Jugador("Juanjo", LocalDate.of(2001, 3, 13), 2, 5, 6, alero);
         jugadorRepository.save(jugador4);
 
-        Jugador jugador5 = new Jugador("Carlitus", LocalDate.of(1950, 10, 5), 2, 4, 7, "base");
+        Jugador jugador5 = new Jugador("Carlitus", LocalDate.of(1950, 10, 5), 2, 4, 7, base);
         jugadorRepository.save(jugador5);
 
         System.out.println("Busca jugadores por nombre: ");
         System.out.println(jugadorRepository.findByNombre("Pablo"));
+
+        System.out.println("Busca jugadores por canastas mayores o iguales: ");
+        System.out.println(jugadorRepository.findBycanastasGreaterThanEqual(200));
+
+        System.out.println("Busca jugadores por asistencias entre: ");
+        System.out.println(jugadorRepository.findByasisteciasBetween(100,401));
+
+        System.out.println("Busca jugadores por posición: ");
+        System.out.println(jugadorRepository.findByposicion(pivot));
+
+        System.out.println("Busca jugadores por posición: ");
+        System.out.println(jugadorRepository.findByfecha_nacimientoBefore(LocalDate.of(2000, 1, 1)));
+
+
 
     }
 }
