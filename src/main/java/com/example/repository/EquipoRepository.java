@@ -13,6 +13,6 @@ public interface EquipoRepository extends JpaRepository<Equipo, Long> {
 
     //Spring Data Queries
 
-    List<Equipo> findByLocalidad(String localidad);
+    List<Equipo>findByLocalidad(String localidad);
 
 }

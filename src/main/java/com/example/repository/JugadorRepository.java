@@ -18,23 +18,23 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
     List<Jugador> findByNombre(String nombre);
     List<Jugador> findBycanastasGreaterThanEqual(Integer canastas);
-    List<Jugador> findByasisteciasBetween(Integer min, Integer max);
+    List<Jugador> findByasistenciasBetween(Integer min, Integer max);
     List<Jugador> findByposicion(Posicion posicion);
     List<Jugador> findByfechanacimientoBefore(LocalDate nacimiento);
 
-    @Query("SELECT jugador.posicion, AVG(jugador.canastas)," +
-            "AVG(jugador.asistencias), AVG(jugador.rebotes)," +
-            "FROM Jugador jugador"+
+    @Query("SELECT jugador.posicion, AVG(jugador.canastas), " +
+            "AVG(jugador.asistencias), AVG(jugador.rebotes) " +
+            "FROM Jugador jugador " +
             "GROUP BY jugador.posicion")
-           List<Object[]>AvgJugadoresPosicion();
+    List<Object[]> AvgJugadoresPosicion();
 
-    @Query("SELECT jugador.posicion, AVG(jugador.canastas)," +
-            "AVG(jugador.asistencias), AVG(jugador.rebotes)," +
-            "AVG(jugador.canastas),MAX(jugador.asistencias), MAX(jugador.rebotes)" +
-            "FROM Jugador jugador"+
+    @Query("SELECT jugador.posicion, AVG(jugador.canastas), " +
+            "AVG(jugador.asistencias), AVG(jugador.rebotes), " +
+            "MIN(jugador.canastas), MIN(jugador.asistencias), MIN(jugador.rebotes)," +
+            "MAX(jugador.canastas), MAX(jugador.asistencias), MAX(jugador.rebotes) " +
+            "FROM Jugador jugador " +
             "GROUP BY jugador.posicion")
-    List<Object[]>AvgJugadoresMaxMin();
-
+    List<Object[]> AvgJugadoresMaxMin();
 
 }
 

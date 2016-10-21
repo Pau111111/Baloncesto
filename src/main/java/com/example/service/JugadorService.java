@@ -33,16 +33,16 @@ public class JugadorService {
         equipoRepository.save(equipo1);
 
         Equipo equipo2 = new Equipo("Puchu Gaming", "Molins de Rei", LocalDate.of(2016, 1, 1));
-        equipoRepository.save(equipo1);
+        equipoRepository.save(equipo2);
 
         Equipo equipo3 = new Equipo("Clantimplora", "Barcelona", LocalDate.of(1999, 10, 12));
-        equipoRepository.save(equipo1);
+        equipoRepository.save(equipo3);
 
         Equipo equipo4 = new Equipo("Clantinflas", "La Floresta", LocalDate.of(1877, 10, 2));
-        equipoRepository.save(equipo1);
+        equipoRepository.save(equipo4);
 
         Equipo equipo5 = new Equipo("Merli4eve", "Sky", LocalDate.of(2005, 7, 12));
-        equipoRepository.save(equipo1);
+        equipoRepository.save(equipo5);
 
 
         //JUGADORES
@@ -164,7 +164,7 @@ public class JugadorService {
         System.out.println(jugadorRepository.findBycanastasGreaterThanEqual(200));
 
         System.out.println("Busca jugadores por asistencias entre: ");
-        System.out.println(jugadorRepository.findByasisteciasBetween(100,401));
+        System.out.println(jugadorRepository.findByasistenciasBetween(100,401));
 
         System.out.println("Busca jugadores por posición: ");
         System.out.println(jugadorRepository.findByposicion(pivot));
