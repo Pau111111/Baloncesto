@@ -20,14 +20,20 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     List<Jugador> findBycanastasGreaterThanEqual(Integer canastas);
     List<Jugador> findByasisteciasBetween(Integer min, Integer max);
     List<Jugador> findByposicion(Posicion posicion);
-    List<Jugador> findByfecha_nacimientoBefore(LocalDate nacimiento);
+    List<Jugador> findByfechanacimientoBefore(LocalDate nacimiento);
 
-    @Query("SELECT jugadores.posicion, AVG(jugadores.canastas)," +
-            "AVG(jugadores.asistencias), AVG(jugadores.rebotes)," +
-            "FROM Jugadores jugadores"+
-            "GROUP BY jugadores.posicion")
-           List<Object[]>AvgJugadoresposicion();
+    @Query("SELECT jugador.posicion, AVG(jugador.canastas)," +
+            "AVG(jugador.asistencias), AVG(jugador.rebotes)," +
+            "FROM Jugador jugador"+
+            "GROUP BY jugador.posicion")
+           List<Object[]>AvgJugadoresPosicion();
 
+    @Query("SELECT jugador.posicion, AVG(jugador.canastas)," +
+            "AVG(jugador.asistencias), AVG(jugador.rebotes)," +
+            "AVG(jugador.canastas),MAX(jugador.asistencias), MAX(jugador.rebotes)" +
+            "FROM Jugador jugador"+
+            "GROUP BY jugador.posicion")
+    List<Object[]>AvgJugadoresMaxMin();
 
 
 }

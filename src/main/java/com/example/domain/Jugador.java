@@ -2,10 +2,7 @@ package com.example.domain;
 
 import org.apache.tomcat.jni.Local;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -19,16 +16,18 @@ public class Jugador {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nombre;
-    private LocalDate fecha_nacimiento;
+    private LocalDate fechanacimiento;
     private Integer canastas;
     private Integer asistencias;
     private Integer rebotes;
     private Posicion posicion;
+    @ManyToOne
+    private Equipo equipo;
 
 
     public Jugador(String nombre, LocalDate fecha_nacimiento, Integer canastas, Integer asistencias, Integer rebotes, Posicion posicion) {
         this.nombre = nombre;
-        this.fecha_nacimiento = fecha_nacimiento;
+        this.fechanacimiento = fecha_nacimiento;
         this.canastas = canastas;
         this.asistencias = asistencias;
         this.rebotes = rebotes;
@@ -55,11 +54,11 @@ public class Jugador {
     }
 
     public LocalDate getFecha_nacimiento() {
-        return fecha_nacimiento;
+        return fechanacimiento;
     }
 
     public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+        this.fechanacimiento = fecha_nacimiento;
     }
 
     public Integer getCanastas() {
@@ -94,12 +93,20 @@ public class Jugador {
         this.posicion = posicion;
     }
 
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
     @Override
     public String toString() {
         return "Jugador{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", fecha_nacimiento='" + fecha_nacimiento + '\'' +
+                ", fecha_nacimiento='" + fechanacimiento + '\'' +
                 ", canastas=" + canastas +
                 ", asistencias=" + asistencias +
                 ", rebotes=" + rebotes +
