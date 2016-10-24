@@ -187,10 +187,20 @@ public class JugadorService {
                         + "min asistencias" + posicion[8] + "min rebotes" + posicion[9]));
 
 
-       //EQUIPOS
+        System.out.println("Busca jugadores por equipo: ");
+        System.out.println(jugadorRepository.findByEquipoNombre("Clanzoncillos"));
+
+        System.out.println("Busca jugadores por equipo que jueguen de escolta: ");
+        System.out.println(jugadorRepository.findByEquipoNombreAndPosicion("Puchu Gaming", escolta));
+
+
+        //EQUIPOS
 
         System.out.println("Busca equipos por localidad: ");
         System.out.println(equipoRepository.findByLocalidad("Molins de Rei"));
+
+
+
 
     }
 }
