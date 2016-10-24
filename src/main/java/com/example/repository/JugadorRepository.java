@@ -23,6 +23,7 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     List<Jugador> findByfechanacimientoBefore(LocalDate nacimiento);
     List<Jugador>findByEquipoNombre(String nombre);
     List<Jugador>findByEquipoNombreAndPosicion(String nombre, Posicion posicion);
+    List<Jugador>findByAsistenciasGreaterThan(Integer asistencias);
 
    @Query("SELECT jugador.posicion, AVG(jugador.canastas), " +
             "AVG(jugador.asistencias), AVG(jugador.rebotes) " +
