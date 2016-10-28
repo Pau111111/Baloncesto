@@ -161,7 +161,7 @@ public class JugadorService {
         System.out.println(jugadorRepository.findByNombre("Pablo"));
 
         System.out.println("Busca jugadores por canastas mayores o iguales: ");
-        System.out.println(jugadorRepository.findBycanastasGreaterThanEqual(200));
+        System.out.println(jugadorRepository.findByCanastasGreaterThanEqual(200));
 
         System.out.println("Busca jugadores por asistencias entre: ");
         System.out.println(jugadorRepository.findByasistenciasBetween(100,401));

@@ -17,7 +17,7 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     //Spring Data Queries
 
     List<Jugador> findByNombre(String nombre);
-    List<Jugador> findBycanastasGreaterThanEqual(Integer canastas);
+    List<Jugador> findByCanastasGreaterThanEqual(Integer canastas);
     List<Jugador> findByasistenciasBetween(Integer min, Integer max);
     List<Jugador> findByposicion(Posicion posicion);
     List<Jugador> findByfechanacimientoBefore(LocalDate nacimiento);
