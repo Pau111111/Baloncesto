@@ -41,17 +41,17 @@ public class PlayerController {
                                     createFailureAlert("player", "idexists", "A new player cannot already have an ID")).body(null);
         }
         Jugador result = jugadorRepository.save(jugador);
-        return ResponseEntity.created(new URI("/players/" + result.getId()))
+        return ResponseEntity.created(new URI("/jugadores/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("jugador", result.getId().toString()))
                 .body(result);
     }
 
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Jugador createJugador(@RequestBody Jugador jugador) {
-        return jugadorRepository.save(jugador);
-    }
+    //@PostMapping
+    //@ResponseStatus(HttpStatus.CREATED)
+   // public Jugador createJugador(@RequestBody Jugador jugador) {
+     //   return jugadorRepository.save(jugador);
+    //}
 
     @PutMapping
     public Jugador updateJugador(@RequestBody Jugador jugador) {
