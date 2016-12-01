@@ -1,13 +1,20 @@
 package com.example.controller;
 
 import com.example.controller.DTO.EstadisticasPosicion;
+import com.example.controller.Util.HeaderUtil;
 import com.example.domain.Jugador;
 import com.example.domain.Posicion;
 import com.example.repository.JugadorRepository;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +26,26 @@ import java.util.Map;
 @RestController
 @RequestMapping ("/jugadores")
 public class PlayerController {
+
     @Autowired
     private JugadorRepository jugadorRepository;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Jugador> createPlayer(@RequestBody Jugador jugador) throws URISyntaxException {
+        if (jugador.getId() != null) {
+            return ResponseEntity.
+                    badRequest().
+                    headers(
+                            HeaderUtil.
+                                    createFailureAlert("player", "idexists", "A new player cannot already have an ID")).body(null);
+        }
+        Jugador result = jugadorRepository.save(jugador);
+        return ResponseEntity.created(new URI("/players/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("jugador", result.getId().toString()))
+                .body(result);
+    }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -61,11 +86,19 @@ public class PlayerController {
     }
 
     @GetMapping("/JugadoresGroupPosition")
-    public List<Object[]> JugadoresGroupPosition() {
-        return jugadorRepository.JugadoresGroupPosition();
+    public Map<Posicion, Collection<Jugador>> JugadoresGroupPosition(){
+        List<Jugador> jugadores = jugadorRepository.findAll();
+
+        ListMultimap<Posicion, Jugador> playerMultiMap = ArrayListMultimap.create();
+
+        jugadores.forEach(jugador -> playerMultiMap.put(jugador.getPosicion(), jugador));
+
+
+        System.out.println(playerMultiMap.get(Posicion.alapivot));
+
+        return playerMultiMap.asMap();
     }
 
-    //no funciona
     @GetMapping("/JugadoresGroupPositionPlus")
     public Map<Posicion, EstadisticasPosicion> JugadoresGroupPositionPlus(){
 
@@ -73,8 +106,7 @@ public class PlayerController {
 
         Map<Posicion, EstadisticasPosicion> estadisticasPosicionMap = new HashMap<>();
 
-        estadisticasPosicions.
-                forEach(estadisticasPosicion -> {
+        estadisticasPosicions.forEach(estadisticasPosicion -> {
 
                     EstadisticasPosicion aux = new EstadisticasPosicion();
                     aux.setPosicion((Posicion)estadisticasPosicion[0]);

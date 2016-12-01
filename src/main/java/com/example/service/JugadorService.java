@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+import static com.example.domain.Localidad.*;
 import static com.example.domain.Posicion.*;
 
 /**
@@ -29,19 +30,19 @@ public class JugadorService {
 
         //EQUIPOS
 
-        Equipo equipo1 = new Equipo("Clanzoncillos", "Dojo", LocalDate.of(1877, 10, 2));
+        Equipo equipo1 = new Equipo("Clanzoncillos", MolinsDeRei, LocalDate.of(1877, 10, 2));
         equipoRepository.save(equipo1);
 
-        Equipo equipo2 = new Equipo("Puchu Gaming", "Molins de Rei", LocalDate.of(2016, 1, 1));
+        Equipo equipo2 = new Equipo("Puchu Gaming", MolinsDeRei, LocalDate.of(2016, 1, 1));
         equipoRepository.save(equipo2);
 
-        Equipo equipo3 = new Equipo("Clantimplora", "Barcelona", LocalDate.of(1999, 10, 12));
+        Equipo equipo3 = new Equipo("Clantimplora", Barcelona, LocalDate.of(1999, 10, 12));
         equipoRepository.save(equipo3);
 
-        Equipo equipo4 = new Equipo("Clantinflas", "La Floresta", LocalDate.of(1877, 10, 2));
+        Equipo equipo4 = new Equipo("Clantinflas", LaFloresta, LocalDate.of(1877, 10, 2));
         equipoRepository.save(equipo4);
 
-        Equipo equipo5 = new Equipo("Merli4eve", "Sky", LocalDate.of(2005, 7, 12));
+        Equipo equipo5 = new Equipo("Merli4eve", Sky, LocalDate.of(2005, 7, 12));
         equipoRepository.save(equipo5);
 
 
@@ -197,7 +198,7 @@ public class JugadorService {
         //EQUIPOS
 
         System.out.println("Busca equipos por localidad: ");
-        System.out.println(equipoRepository.findByLocalidad("Molins de Rei"));
+        System.out.println(equipoRepository.findByLocalidad(MolinsDeRei));
 
 
 

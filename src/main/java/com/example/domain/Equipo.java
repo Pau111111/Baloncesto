@@ -16,13 +16,13 @@ public class Equipo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;
-    private String localidad;
+    private Localidad localidad;
     private LocalDate creacion;
 
     public Equipo() {
     }
 
-    public Equipo(String nombre, String localidad, LocalDate creacion) {
+    public Equipo(String nombre, Localidad localidad, LocalDate creacion) {
         this.nombre = nombre;
         this.localidad = localidad;
         this.creacion = creacion;
@@ -44,11 +44,11 @@ public class Equipo {
         this.nombre = nombre;
     }
 
-    public String getLocalidad() {
+    public Localidad getLocalidad() {
         return localidad;
     }
 
-    public void setLocalidad(String localidad) {
+    public void setLocalidad(Localidad localidad) {
         this.localidad = localidad;
     }
 

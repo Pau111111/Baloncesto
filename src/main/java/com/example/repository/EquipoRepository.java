@@ -3,6 +3,7 @@ package com.example.repository;
 
 import com.example.domain.Equipo;
 import com.example.domain.Jugador;
+import com.example.domain.Localidad;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,6 +16,6 @@ public interface EquipoRepository extends JpaRepository<Equipo, Long> {
 
     //Spring Data Queries
 
-    List<Equipo>findByLocalidad(String localidad);
+    List<Equipo>findByLocalidad(Localidad localidad);
 
 }
